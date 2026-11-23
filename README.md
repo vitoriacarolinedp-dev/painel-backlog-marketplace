@@ -108,4 +108,4 @@ painel-backlog-marketplace/
 ## Autora
 
 **Vitoria de Paula** · Análise de dados aplicada a atendimento e marketplace
-[LinkedIn](https://www.linkedin.com/in/vitoria-de-paula-master/
+[LinkedIn](https://www.linkedin.com/in/vitoria-de-paula-master/)
