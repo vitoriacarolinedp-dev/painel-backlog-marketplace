@@ -6,9 +6,7 @@ Painel interativo que consolida, em uma leitura diária, o backlog de protocolos
 
 ![Demonstração do painel](assets/demo.gif)
 
-🔗 **Acesse o painel:** `https://SEU-USUARIO.github.io/painel-backlog-marketplace/`
-
----
+🔗  **Acesse o painel:** [vitoriacarolinedp-dev.github.io/painel-backlog-marketplace](https://vitoriacarolinedp-dev.github.io/painel-backlog-marketplace/)
 
 ## Problema de negócio
 
@@ -110,4 +108,4 @@ painel-backlog-marketplace/
 ## Autora
 
 **Vitoria de Paula** · Análise de dados aplicada a atendimento e marketplace
-[LinkedIn](https://www.linkedin.com/in/SEU-PERFIL)
+[LinkedIn](https://www.linkedin.com/in/vitoria-de-paula-master/
