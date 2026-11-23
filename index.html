@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<title>Painel de Backlog — Marketplace (dados fictícios)</title>
+<style>
+:root{--bg:#eef1f6;--card:#fff;--navy:#0f1b3d;--ink:#16213e;--muted:#6b7590;--line:#e4e8f0;--soft:#f5f7fb;--bar:#8392c4;--red:#d14343;--green:#23935a;--amber:#c98a12;--blue:#3b5bdb;--accent:#8fb0ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Inter,"Segoe UI",system-ui,sans-serif;color:var(--ink);font-size:12.5px;line-height:1.4}
+.wrap{max-width:1420px;margin:0 auto;padding:0 16px 16px}
+header{background:var(--navy);color:#fff;border-radius:0 0 16px 16px;padding:18px 22px;display:flex;align-items:center;gap:14px}
+.logo{width:40px;height:40px;border-radius:11px;background:rgba(255,255,255,.1);display:grid;place-items:center;flex:none}
+header h1{margin:0;font-size:19px;font-weight:700}
+header h1 span{color:var(--accent)}
+header p{margin:3px 0 0;color:#aab4d0;font-size:11.5px}
+.fict{background:#ffd84d;color:#3a2c00;border-radius:999px;padding:3px 9px;font-size:9.5px;font-weight:800;letter-spacing:.4px;margin-left:8px;vertical-align:middle}
+.date{margin-left:auto;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:7px 14px;font-weight:700;font-size:11.5px;white-space:nowrap}
+.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 8px}
+.tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 15px;font:600 12.5px Inter,sans-serif;color:#4a5370;cursor:pointer}
+.tab.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.att{display:flex;align-items:flex-start;gap:8px;margin:2px 0 12px;font-size:12px;color:#3d4660}
+.att:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);margin-top:5px;flex:none}
+.att .nx{margin-left:14px;color:var(--blue);font-weight:600;cursor:pointer;white-space:nowrap}
+.r{color:var(--red);font-weight:700}.g{color:var(--green);font-weight:700}.a{color:var(--amber);font-weight:700}.m{color:#9aa2b8}
+.grid{display:grid;gap:12px}.g2{grid-template-columns:1fr 1fr}.g4{grid-template-columns:repeat(4,1fr)}.g5{grid-template-columns:repeat(5,1fr)}.g6{grid-template-columns:repeat(6,1fr)}
+.mb{margin-bottom:12px}
+.grid>*{min-width:0}.card{overflow-x:auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+.kpi{padding:10px 13px}
+.kpi .l{font-size:10.5px;font-weight:600;letter-spacing:.4px;color:var(--muted);text-transform:uppercase}
+.kpi .v{font-size:22px;font-weight:800;margin:2px 0 1px}
+.kpi .s{font-size:11px;color:var(--muted)}
+.ch{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.ch h3{margin:0;font-size:14px;font-weight:700}
+.ch .sub{margin-left:auto;color:var(--muted);font-size:11.5px}
+.ico{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:10.5px;flex:none;color:#fff}
+.hi{background:#fff3d6;color:#c98a12}
+.tag{margin-left:auto;font-size:10px;font-weight:700;border-radius:6px;padding:3px 7px;white-space:nowrap}
+.t-red{background:#fde8e8;color:var(--red)}.t-amb{background:#fff3d6;color:var(--amber)}.t-gr{background:#eaeef8;color:#4b5a80}.t-ok{background:#e3f5ea;color:var(--green)}
+.dot{font-size:11px;font-weight:600;color:var(--green);margin-left:8px;white-space:nowrap}
+table{width:100%;border-collapse:collapse}
+th{font-size:10.5px;color:var(--muted);font-weight:600;text-align:right;padding:6px 5px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:5px 5px;text-align:right;border-bottom:1px solid #f0f2f7}
+th:first-child,td:first-child,th.l,td.l{text-align:left}
+td{white-space:nowrap}
+.g4 td:first-child{white-space:normal}
+.g4 table{font-size:11.5px}.g4 th,.g4 td{padding:5px 3px}
+.plano td{white-space:normal}
+tbody tr:nth-child(odd){background:var(--soft)}
+tr.tot td{font-weight:800;background:#e9edf7}
+.bar{height:7px;border-radius:6px;background:#e6e9f2;overflow:hidden;display:flex;min-width:60px}
+.bar i{display:block;height:100%;background:var(--bar)}.bar i.gr{background:#3aa56b}.bar i.rd{background:var(--red)}
+.pl{display:flex;align-items:center;gap:7px;white-space:nowrap}
+.pl .ico{width:20px;height:20px;font-size:8.5px;border-radius:5px}
+.pill{display:inline-block;background:#eaeef8;color:#4b5a80;border-radius:6px;padding:1px 7px;font-size:10px;font-weight:600;margin-left:6px}
+.note{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:9px 11px;color:#3d4660;margin-top:10px;font-size:12px}
+.bk{border:1px solid var(--line);border-radius:10px;padding:8px 11px;margin-top:8px;font-size:12px;color:#3d4660}
+.bk a,.lnk{color:var(--blue);font-weight:600;cursor:pointer}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+.chip{display:flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:5px 9px;font-weight:600;cursor:pointer}
+.chip.on{border-color:var(--blue);box-shadow:0 0 0 2px #dfe6ff}
+.chip .ico{width:20px;height:20px;font-size:8.5px;border-radius:5px}.chip em{font-style:normal;color:var(--muted);font-weight:500}
+.hero{background:#fff;border:1px solid var(--line);border-left:5px solid var(--navy);border-radius:14px;padding:12px 18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:10px}
+.hero .l{font-size:10.5px;font-weight:600;color:var(--muted);letter-spacing:.4px;text-transform:uppercase;grid-column:1/-1;margin-bottom:-6px}
+.hero .v{font-size:24px;font-weight:800}.hero .s{font-size:11px;color:var(--muted)}
+select{border:1px solid var(--line);border-radius:8px;padding:6px 8px;font:500 12px Inter,sans-serif;background:#fff;color:var(--ink)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.legend{display:flex;gap:14px;font-size:11px;color:var(--muted);margin-bottom:4px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:middle}
+.coll .ch{border-bottom:none;padding-bottom:0;margin-bottom:0;cursor:pointer}
+.coll.open .ch{border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:10px}
+.coll .body{display:none}.coll.open .body{display:block}
+.coll .arr{font-size:10px;color:var(--muted);transition:none}.coll.open .arr{display:inline-block;transform:rotate(90deg)}
+.alerts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.al{border:1px solid var(--line);border-radius:12px;padding:11px;display:flex;gap:11px}
+.al .k{font-size:9.5px;font-weight:800;border-radius:6px;padding:4px 7px;height:fit-content;letter-spacing:.4px}
+.al b{display:block;font-size:13px;margin-bottom:3px}.al p{margin:0;color:#4d5670;font-size:12px}.al .who{margin-top:5px;font-size:11.5px;color:#2f3852}
+.st{font-size:10px;font-weight:700;border-radius:6px;padding:3px 7px;white-space:nowrap}
+.plano td{text-align:left;vertical-align:top;padding:7px 6px}
+.plano td:first-child{white-space:normal;font-weight:700;width:17%}
+footer{margin:16px 0 4px;color:var(--muted);font-size:11px;border-top:1px solid var(--line);padding-top:10px}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+ <div class="logo"><svg width="19" height="19" viewBox="0 0 20 20"><rect x="2" y="10" width="4" height="8" rx="1" fill="#cdd7ff"/><rect x="8" y="5" width="4" height="13" rx="1" fill="#cdd7ff"/><rect x="14" y="8" width="4" height="10" rx="1" fill="#cdd7ff"/></svg></div>
+ <div><h1>Painel de Backlog — <span>Marketplace</span><span class="fict">DADOS FICTÍCIOS</span></h1>
+ <p>Protocolos Plataformas · Chamados Internos · Indicadores do dia · Números do dia fechado x comparativo de 30 dias atrás</p></div>
+ <div class="date">CORTE: HOJE</div>
+</header>
+<nav class="tabs" id="tabs">
+ <button class="tab on" data-v="sell">Indicadores do dia</button>
+ <button class="tab" data-v="geral">Resumo do dia</button>
+ <button class="tab" data-v="plat">Protocolos Plataformas</button>
+ <button class="tab" data-v="inc">Chamados Internos</button>
+ <button class="tab" data-v="area">Área Responsável</button>
+ <button class="tab" data-v="plano">Plano de Ação</button>
+</nav>
+<section id="v-sell"></section><section id="v-geral" class="hide"></section><section id="v-plat" class="hide"></section>
+<section id="v-inc" class="hide"></section><section id="v-area" class="hide"></section><section id="v-plano" class="hide"></section>
+<footer><span class="g">Verde</span>: melhora &nbsp;|&nbsp; <span class="r">Vermelho</span>: piora &nbsp;|&nbsp; Cinza: sem alteração &nbsp;|&nbsp; Todos os nomes, números e ações deste painel são fictícios, criados só para demonstrar a estrutura.</footer>
+</div>
+<script>
+// ================= DADOS FICTÍCIOS =================
+const CATS=['Pós-compra','Entrega','Cancelamento','Troca e devolução','Pré-compra'];
+const P=[ // protocolos por tipo: [D-30, hoje]; chamados: [D-30, hoje]
+ {id:'A',name:'Marketplace A',c:'#4f46e5',prot:{'Pós-compra':[302,214],'Entrega':[97,161],'Cancelamento':[151,96],'Troca e devolução':[31,35],'Pré-compra':[41,0]},inc:[1172,934],note:'Reputação no amarelo'},
+ {id:'B',name:'Marketplace B',c:'#0891b2',prot:{'Pós-compra':[1402,948],'Cancelamento':[288,301],'Troca e devolução':[97,41]},inc:[1003,791]},
+ {id:'C',name:'Marketplace C',c:'#7c3aed',prot:{'Entrega':[171,578],'Pós-compra':[44,72]},inc:[129,84]},
+ {id:'D',name:'Site próprio',c:'#475569',prot:{'Pós-compra':[0,161]},inc:[0,2]},
+ {id:'E',name:'Marketplace E',c:'#0f766e',prot:{'Pós-compra':[97,83]},inc:[268,149]},
+ {id:'F',name:'Marketplace F',c:'#b45309',prot:{'Pós-compra':[24,35]},inc:[121,115]},
+ {id:'G',name:'Marketplace G',c:'#be185d',prot:{'Pós-compra':[6,0]},inc:[17,26]},
+ {id:'H',name:'Marketplace H',c:'#15803d',prot:{'Pós-compra':[5,2]},inc:[0,0]},
+ {id:'I',name:'Marketplace I',c:'#334155',prot:{'Pós-compra':[7,2]},inc:[8,14]}
+];
+const R=[ // região, peso, taxa atualização, taxa solução entre atualizados, taxa >30d, taxa sem preenchimento entre aguardando
+ ['Região Sul',.21,.12,.06,.36,.06],['Região Leste',.18,.29,.05,.22,.05],['Região Centro',.155,.17,.42,.25,.4],['Região Norte',.12,.02,0,.06,.95],
+ ['Região Litoral',.108,.24,.02,.12,.02],['Região Oeste',.082,.09,.69,.33,.0],['Região Serra',.06,.39,.18,.26,.02],['Região Vale',.05,.1,.3,.21,.1],
+ ['Região Capital',.026,.5,.07,.05,.04],['Região Interior',.006,.36,.2,.2,0],['Região Metropolitana',.004,.78,.14,.1,0]];
+const PILOT='__none__';
+const ORIG=['Chat','Protocolo','E-mail'], ORIGW=[.58,.30,.12];
+const AREAS=['Logística','Logística/Atendimento','Produção','Atendimento','Planejamento','Cadastro'], AREAW=[.68,.121,.099,.08,.012,.008];
+const AREAS_S=['Logística','Log./Atend.','Produção','Atendimento','Planej.','Cadastro'];
+const AREAPREV=[1.036,1.077,.986,1.012,1.46,1.69];
+const TRAT=[['Logística','Confirmar coleta',.41],['Logística','Interromper entrega',.161],['Logística','Realizar entrega',.109],['Logística/Atendimento','Confirmar entrega',.112],['Logística/Atendimento','Confirmar troca',.009],['Produção','Liberar produção',.068],['Produção','Produzir e liberar envio',.03],['Produção','Liberar pedido',.001],['Atendimento','Em análise',.08],['Planejamento','Programar pedido',.012],['Cadastro','Cancelar pedido',.008]];
+const AGEL=['Até 7 dias','8 a 15 dias','16 a 30 dias','Acima de 30 dias'];
+const SUBJL=['Solicitação de cancelamento','Atraso na entrega','Solicitação de troca','Atraso na troca'], SUBJW=[.685,.248,.066,.001];
+// ================= CÁLCULOS =================
+function alloc(total,w){const s=w.reduce((a,b)=>a+b,0);if(!s)return w.map(()=>0);const raw=w.map(x=>x/s*total);const fl=raw.map(Math.floor);let r=total-fl.reduce((a,b)=>a+b,0);raw.map((x,i)=>[x-fl[i],i]).sort((a,b)=>b[0]-a[0]).slice(0,r).forEach(([,i])=>fl[i]++);return fl}
+const sum=(a,k)=>a.reduce((s,x)=>s+(k?x[k]:x),0);
+const M={};
+P.forEach((p,pi)=>{const t=alloc(p.inc[1],R.map(r=>r[1]));const t30=alloc(p.inc[0],R.map(r=>r[1]*(1+((pi+R.indexOf(r))%3-1)*.15)));
+ M[p.id]=R.map((r,i)=>{const tot=t[i];const at=Math.min(tot,Math.round(tot*r[2]));const sim=Math.round(at*r[3]);const ag=tot-at;
+  return{u:r[0],tot,t30:t30[i],ag,at,sim,nao:at-sim,old:Math.round(tot*r[4]),sv:Math.round(ag*r[5]),orig:alloc(tot,ORIGW),area:alloc(tot,AREAW)}})});
+P.forEach(p=>{const rows=M[p.id];p.back=sum(Object.values(p.prot).map(x=>x[1]));p.back30=sum(Object.values(p.prot).map(x=>x[0]));
+ ['tot','ag','at','sim','nao','old','sv'].forEach(k=>p[k]=sum(rows,k));p.t30=p.inc[0];p.area=AREAS.map((_,j)=>sum(rows.map(r=>r.area[j])))});
+const RG=R.map((r,i)=>{const o={u:r[0],tot:0,t30:0,ag:0,at:0,sim:0,nao:0,old:0,sv:0,orig:[0,0,0],area:AREAS.map(()=>0)};P.forEach(p=>{const x=M[p.id][i];['tot','t30','ag','at','sim','nao','old','sv'].forEach(k=>o[k]+=x[k]);x.orig.forEach((v,j)=>o.orig[j]+=v);x.area.forEach((v,j)=>o.area[j]+=v)});return o});
+const T={back:sum(P,'back'),back30:sum(P,'back30')};['tot','t30','ag','at','sim','nao','old','sv'].forEach(k=>T[k]=sum(P,k));
+T.ag30=Math.round(T.ag*1.089);T.nao30=T.nao+375;T.old30=T.old+370;T.at30=T.at+464;
+T.area=AREAS.map((_,j)=>sum(RG.map(r=>r.area[j])));T.areaPrev=T.area.map((v,j)=>Math.round(v*AREAPREV[j]));
+const AGE=(()=>{const a=alloc(T.tot-T.old,[.264,.148,.182]);return[...a,T.old]})();
+const SUBJ=alloc(T.tot,SUBJW);
+const FILLV=[T.sim,T.tot-T.sim-T.sv-0,T.sv];FILLV[1]=T.tot-FILLV[0]-FILLV[2];
+// ================= HELPERS =================
+const fmt=n=>(+n).toLocaleString('pt-BR'), pct=(a,b,d=1)=>b?(a/b*100).toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:d})+'%':'0%';
+const ico=p=>`<span class="ico" style="background:${p.c}">${p.id==='D'?'SP':p.id}</span>`;
+const plc=p=>`<div class="pl">${ico(p)}${p.name}${p.tag?`<span class="pill">${p.tag}</span>`:''}</div>`;
+const plcS=p=>`<div class="pl">${ico(p)}${p.name}</div>`;
+const bar=(v,max,c='')=>`<div class="bar"><i class="${c}" style="width:${max?v/max*100:0}%"></i></div>`;
+const bar2=(ag,at,max)=>`<div class="bar" style="width:${Math.max(3,(ag+at)/max*100)}%;min-width:4px"><i style="width:${(ag/(ag+at||1))*100}%"></i><i class="gr" style="width:${(at/(ag+at||1))*100}%"></i></div>`;
+const saldo=(now,prev,goodDown=true)=>{const d=now-prev;if(!d)return'<span class="m">0</span>';const good=goodDown?d<0:d>0;return`<span class="${good?'g':'r'}">${d<0?'↓':'↑'} ${fmt(Math.abs(d))}</span>`};
+const card=(h,body,cls='')=>`<div class="card ${cls}">${h}${body}</div>`;
+const head=(ic,title,sub='',icStyle='hi')=>`<div class="ch">${typeof ic==='string'?`<span class="ico ${icStyle}">${ic}</span>`:ico(ic)}<h3>${title}</h3><span class="sub">${sub}</span></div>`;
+const kpi=(l,v,s,vc='')=>`<div class="card kpi"><div class="l">${l}</div><div class="v ${vc}">${v}</div><div class="s">${s}</div></div>`;
+const coll=(ic,title,hint,body,id)=>`<div class="card coll" id="${id}"><div class="ch" data-coll="${id}"><span class="ico hi">${ic}</span><h3>${title} <span class="arr">▶</span></h3><span class="sub lnk">${hint}</span></div><div class="body">${body}</div></div>`;
+const byBack=[...P].sort((a,b)=>b.back-a.back), byTot=[...P].filter(p=>p.tot||p.t30).sort((a,b)=>b.tot-a.tot), RGs=[...RG].sort((a,b)=>b.tot-a.tot);
+const regName=r=>r.u+(r.u===PILOT?'<span class="pill">projeto piloto</span>':'');
+
+// ================= 1. INDICADORES DO DIA =================
+// [indicador, meta, tipo max|min|none, alvo, D-30, D-7, Hoje, sufixo, casas]
+const S={
+ A:{tag:['Fora da meta','t-red'],extra:'<span class="dot">● Amarelo</span>',rows:[['Protocolos / vendas','≤ 1%','max',1,1.44,2.0,1.99,'%',2],['Disputas / vendas','< 0,5%','max',.5,.5,.73,.72,'%',2],['Cancelamento pelo vendedor','< 0,5%','max',.5,.03,0,.03,'%',2],['Nível da loja','Máximo','none',0,'Verde','Verde','Amarelo','',0]],txt:'Protocolos em 1,99% das vendas (meta ≤ 1%); eram 2,00% há uma semana. Disputas em 0,72% (meta < 0,5%). Cancelamento pelo vendedor em 0,03%, dentro da meta.'},
+ B:{tag:['Atenção','t-gr'],rows:[['Pedidos fora do prazo','< 8%','max',8,4.76,7.43,1.96,'%',2],['Pontos de penalidade','0','max',0,0,2,2,'',0],['Avaliação da loja','5','min',4.8,4.82,4.82,4.83,'',2],['Nível da loja','Excelente','none',0,'Bom','Regular','Regular','',0]],txt:'Pedidos fora do prazo em 1,96% (7,43% há uma semana), dentro da meta. Nível da loja em "Regular" e os 2 pontos de penalidade seguem (meta 0).'},
+ C:{tag:['Crítico','t-red'],rows:[['Envios com atraso','< 4%','max',4,1.2,3.66,7.29,'%',2],['Pedidos com problema','< 1%','max',1,5.43,5.84,5.79,'%',2],['Garantia de reembolso','< 1%','max',1,3.36,3.26,3.91,'%',2],['Saúde da conta','≥ 200','min',200,222,230,238,'',0]],txt:'Envios com atraso em 7,29%, fora da meta (< 4%); eram 3,66% há uma semana. Pedidos com problema em 5,79% e garantia de reembolso em 3,91%. Saúde da conta em 238.'},
+ E:{tag:['Fora da meta','t-red'],rows:[['Reputação geral','5','min',4,2.2,2.2,2.8,'',1],['Entregues no prazo','≥ 95%','min',95,73.7,66,64.2,'%',1],['Cancelamentos','< 2%','max',2,6,5.3,3.4,'%',1],['Agilidade no atendimento','≥ 90%','min',90,99.7,98.9,98.8,'%',1]],txt:'Entregues no prazo em 64,2% (73,7% há 30 dias; meta ≥ 95%). Cancelamentos caíram de 6,0% para 3,4%, ainda acima da meta. Reputação subiu de 2,2 para 2,8.'},
+ F:{tag:['Crítico','t-red'],rows:[['Nota','5','min',4,2.8,1.9,1.9,'',1],['Envio no prazo','≥ 97%','min',97,97.71,93.7,92.92,'%',2],['Entrega no prazo','≥ 97%','min',97,85.71,70.82,68.77,'%',2],['Cancelamento','< 1,5%','max',1.5,6.51,10.57,12.46,'%',2]],txt:'Em 30 dias, a entrega no prazo caiu de 85,71% para 68,77%. Cancelamento em 12,46%, mais de 8 vezes a meta. Nota em 1,9.'},
+ G:{tag:['Fora da meta','t-red'],rows:[['Performance geral','5','min',4.5,3.9,3.9,3.9,'',1],['Cancelados','5','min',4.5,5,5,5,'',1],['Atraso na expedição','5','min',4.5,2.8,2.8,2.8,'',1]],txt:'Sem alteração em 30 dias: performance geral em 3,9 (meta 5) e atraso na expedição em 2,8. Cancelados em 5,0, na meta.'},
+ H:{tag:['Em melhora','t-gr'],rows:[['Taxa de chamados','< 0,5%','max',.5,4,3,2,'%',0],['Tempo de resposta','< 24h','max',24,36,27,19,'h',0],['Envios com atraso','< 3%','max',3,52,44,33,'%',0],['Taxa de reembolso','< 5%','max',5,3,3,2,'%',0]],txt:'Todos os indicadores melhoraram na semana: tempo de resposta de 27h para 19h (dentro da meta) e envios com atraso de 44% para 33%.'},
+ D:{tag:['Dentro da meta','t-ok'],rows:[['Tempo de resposta','< 24h','max',24,31,22,18,'h',0],['Pedidos entregues no prazo','≥ 95%','min',95,93.1,95.4,96.2,'%',1],['Avaliação dos clientes','≥ 4,5','min',4.5,4.4,4.5,4.6,'',1]],txt:'Tempo de resposta caiu de 31h para 18h em 30 dias. Entrega no prazo e avaliação voltaram para dentro da meta.'}
+};
+const ORDER=['A','B','E','D','C','F','G','H'];
+function cellCls(r,v){const[,,type,alvo]=r;if(type==='none'){if(typeof v==='string')return v==='Verde'||v==='Bom'||v==='Excelente'?'g':v==='Amarelo'||v==='Regular'?'r':'';return''}
+ if(type==='max')return v<=alvo?'g':(v<=alvo*1.15?'a':'r');return v>=alvo?'g':(v>=alvo*.97?'a':'r')}
+const nf=(v,d,s)=>typeof v==='string'?v:v.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d})+s;
+document.getElementById('v-sell').innerHTML=`
+<div class="att"><div>Atenção: <span class="r">Marketplace F</span> (cancelamento 12,46%), <span class="r">Marketplace C</span> (envios com atraso 7,29%) e <span class="r">Marketplace E</span> (entrega no prazo 64,2%) · <span class="g">Marketplace H melhora em todos os indicadores (tempo de resposta 19h)</span></div><span class="nx" data-go="geral">Próximo →</span></div>
+<div class="grid g4">${ORDER.map(k=>{const s=S[k];const p=P.find(x=>x.id===(s.base||k));const name=s.name||p.name;
+ return card(`<div class="ch">${ico(p)}<h3>${name}</h3><span class="tag ${s.tag[1]}">${s.tag[0]}</span>${s.extra||''}</div>`,
+ `<table><thead><tr><th>Indicador</th><th>Meta</th><th>D-30</th><th>D-7</th><th>Hoje</th></tr></thead><tbody>
+ ${s.rows.map(r=>`<tr><td style="white-space:normal">${r[0]}</td><td class="m">${r[1]}</td>${[r[4],r[5],r[6]].map(v=>`<td class="${cellCls(r,v)}">${nf(v,r[8],r[7])}</td>`).join('')}</tr>`).join('')}</tbody></table>
+ <div class="note">${s.txt}</div>
+ <div class="bk"><b>No backlog:</b> ${s.bk||`${fmt(p.back)} protocolos na plataforma · ${fmt(p.tot)} chamados internos${p.tot?`, ${pct(p.old,p.tot,0)} há mais de 30 dias`:''}`} <a data-goplat="${p.id}">ver →</a></div>`)}).join('')}</div>
+<p class="m" style="font-size:11px;margin:10px 0 0">Comparativo D-30 | D-7 | Hoje. Cor pela meta: <span class="g">verde</span> dentro da meta · <span class="a">amarelo</span> perto do limite · <span class="r">vermelho</span> fora da meta.</p>`;
+
+// ================= 2. RESUMO DO DIA =================
+const regFill=[...RG].filter(r=>r.sv).sort((a,b)=>b.sv-a.sv);
+const ALERTS=[
+ ['CRÍTICO','t-red',`Marketplace C: ${P[2].prot['Entrega'][1]} protocolos de entrega pendentes`,`Os envios com atraso já estão em 7,29% (meta < 4%). Se esses pedidos não saírem, o indicador sobe de novo.`,'Logística e Produção'],
+ ['CRÍTICO','t-red',`Marketplace F: cancelamento 8 vezes acima da meta`,`Cancelamento em 12,46% e entrega no prazo em 68,77%. ${pct(P[5].old,P[5].tot,0)} dos chamados do canal têm mais de 30 dias.`,'Logística'],
+ ['ATENÇÃO','t-amb',`Marketplace E: entrega no prazo em 64,2%`,`A meta é 95%. Os cancelamentos caíram, mas a entrega segue no menor nível do período.`,'Logística'],
+ ['ATENÇÃO','t-amb',`${pct(T.old,T.tot,0)} dos chamados internos acima de 30 dias`,`${fmt(T.old)} de ${fmt(T.tot)} chamados. Em 30 dias, eram ${fmt(T.old30)}.`,'Regiões, com prioridade para os mais antigos'],
+ ['ATENÇÃO','t-amb',`Logística responde por ${pct(T.area[0],T.tot,0)} dos chamados`,`${fmt(T.area[0])} chamados aguardam ação da Logística, principalmente confirmação de coleta e interrupção de entrega.`,'Logística'],
+ ['ATENÇÃO','t-amb',`Marketplace A no amarelo`,`Protocolos em 1,99% das vendas e disputas em 0,72%. Cada protocolo resolvido dentro do prazo ajuda a conta a voltar ao verde.`,'Time do canal'],
+ ['POSITIVO','t-ok',`Marketplace B: backlog de protocolos caiu ${fmt(P[1].back30-P[1].back)} em 30 dias`,`Saiu de ${fmt(P[1].back30)} para ${fmt(P[1].back)} protocolos abertos, e os pedidos fora do prazo voltaram para dentro da meta.`,''],
+ ['POSITIVO','t-ok',`Chamados internos caíram ${fmt(T.t30-T.tot)} em 30 dias`,`De ${fmt(T.t30)} para ${fmt(T.tot)}. ${RGs[0].u} segue com o maior volume (${fmt(RGs[0].tot)}).`,'']
+];
+document.getElementById('v-geral').innerHTML=`
+<div class="att"><div>${fmt(T.back)} protocolos nas plataformas (D-30: ${fmt(T.back30)}) · <span class="r">${fmt(T.ag)}</span> chamados internos aguardando retorno (D-30: ${fmt(T.ag30)}) · <span class="g">${fmt(T.old)} com mais de 30 dias (D-30: ${fmt(T.old30)})</span></div><span class="nx" data-go="plat">Próximo →</span></div>
+<div class="grid g5 mb">
+ ${kpi('Protocolos plataformas',fmt(T.back),`D-30: ${fmt(T.back30)} ${saldo(T.back,T.back30)}`)}
+ ${kpi('Chamados internos',fmt(T.tot),`D-30: ${fmt(T.t30)} ${saldo(T.tot,T.t30)}`)}
+ ${kpi('Aguardando retorno',fmt(T.ag),`${pct(T.ag,T.tot)} · D-30: ${fmt(T.ag30)} ${saldo(T.ag,T.ag30)}`)}
+ ${kpi('Atualizados',`<span class="g">${T.at}</span>`,`${pct(T.at,T.tot)} dos chamados`)}
+ ${kpi('Chamados acima de 30 dias',fmt(T.old),`${pct(T.old,T.tot)} · D-30: ${fmt(T.old30)} ${saldo(T.old,T.old30)}`,'r')}
+</div>
+<div class="grid g2 mb">
+ ${card(head('★','Protocolos abertos por plataforma','clique para abrir a plataforma'),`<table><thead><tr><th>Plataforma</th><th>D-30</th><th>Hoje</th><th>Saldo</th><th style="width:30%"></th><th>% do total</th></tr></thead><tbody>
+ ${byBack.map(p=>`<tr data-goplat="${p.id}" style="cursor:pointer"><td>${plc(p)}</td><td class="m">${fmt(p.back30)}</td><td><b>${fmt(p.back)}</b></td><td>${saldo(p.back,p.back30)}</td><td>${bar(p.back,byBack[0].back)}</td><td>${pct(p.back,T.back)}</td></tr>`).join('')}
+ <tr class="tot"><td>Total geral</td><td>${fmt(T.back30)}</td><td>${fmt(T.back)}</td><td>${saldo(T.back,T.back30)}</td><td></td><td>100%</td></tr></tbody></table>`)}
+ ${card(head('⚑','Chamados internos por plataforma','clique para abrir a plataforma'),`<div class="legend"><span><i style="background:var(--bar)"></i>Aguardando</span><span><i style="background:#3aa56b"></i>Atualizado</span></div><table><thead><tr><th>Plataforma</th><th>Aguardando</th><th>Atualizado</th><th style="width:30%"></th><th>Total</th><th>Saldo D-30</th></tr></thead><tbody>
+ ${byTot.map(p=>`<tr data-goplat="${p.id}" style="cursor:pointer"><td>${plc(p)}</td><td>${fmt(p.ag)}</td><td class="g">${p.at}</td><td style="min-width:110px">${bar2(p.ag,p.at,byTot[0].tot)}</td><td><b>${fmt(p.tot)}</b></td><td>${saldo(p.tot,p.t30)}</td></tr>`).join('')}
+ <tr class="tot"><td>Total geral</td><td>${fmt(T.ag)}</td><td>${T.at}</td><td></td><td>${fmt(T.tot)}</td><td>${saldo(T.tot,T.t30)}</td></tr></tbody></table>`)}
+</div>
+<div class="grid g2 mb">
+ ${card(head('⚙','Chamados internos por plataforma (área responsável)','cruzamento com pedidos internos'),`<table><thead><tr><th>Plataforma</th>${AREAS_S.map(a=>`<th>${a}</th>`).join('')}<th>Total</th></tr></thead><tbody>
+ ${byTot.filter(p=>p.tot).map(p=>`<tr><td>${plcS(p)}</td>${p.area.map(v=>`<td class="${v?'':'m'}">${fmt(v)}</td>`).join('')}<td><b>${fmt(p.tot)}</b></td></tr>`).join('')}
+ <tr class="tot"><td>Total</td>${T.area.map(v=>`<td>${fmt(v)}</td>`).join('')}<td>${fmt(T.tot)}</td></tr></tbody></table>`)}
+ ${card(head('⌖','Chamados internos por região','hoje x 30 dias atrás'),`<table><thead><tr><th>Região</th><th>D-30</th><th>Hoje</th><th>Saldo</th><th style="width:30%"></th><th>% do total</th></tr></thead><tbody>
+ ${RGs.map(r=>`<tr><td>${r.u}</td><td class="m">${fmt(r.t30)}</td><td><b>${fmt(r.tot)}</b></td><td>${saldo(r.tot,r.t30)}</td><td>${bar(r.tot,RGs[0].tot)}</td><td>${pct(r.tot,T.tot)}</td></tr>`).join('')}
+ <tr class="tot"><td>Total</td><td>${fmt(T.t30)}</td><td>${fmt(T.tot)}</td><td>${saldo(T.tot,T.t30)}</td><td></td><td>100%</td></tr></tbody></table>`)}
+</div>
+${coll('!','Alertas gerenciais do dia',`clique para ver os ${ALERTS.length} alertas gerenciais do dia`,`<div class="alerts">${ALERTS.map(a=>`<div class="al"><span class="k ${a[1]}">${a[0]}</span><div><b>${a[2]}</b><p>${a[3]}</p>${a[4]?`<div class="who">→ ${a[4]}</div>`:''}</div></div>`).join('')}</div>`,'c-alerts')}`;
+
+// ================= 3. PROTOCOLOS PLATAFORMAS =================
+const PEND=(id)=>{const p=P.find(x=>x.id===id);const cats=Object.keys(p.prot);const out=[];for(let i=0;i<8;i++){const c=cats[i%cats.length];out.push([`PRT-${(48213+i*137+id.charCodeAt(0)*11)}`,c,1+((i*7+id.charCodeAt(0))%19),['Hoje','Amanhã','2 dias','Vencido'][(i+id.charCodeAt(0))%4]])}return out};
+function renderPlat(id){
+ const p=P.find(x=>x.id===id), rows=M[id].filter(r=>r.tot>0).sort((a,b)=>b.tot-a.tot), cats=Object.entries(p.prot).sort((a,b)=>b[1][1]-a[1][1]);
+ const mx=Math.max(1,...cats.map(c=>c[1][1])), mu=rows.length?Math.max(...rows.map(r=>r.ag+r.at)):1;
+ const up=cats.filter(c=>c[1][1]>c[1][0]).map(c=>`${c[0].toLowerCase()} subiu de ${c[1][0]} para ${c[1][1]}`), dn=cats.filter(c=>c[1][1]<c[1][0]).map(c=>`${c[0].toLowerCase()} caiu de ${c[1][0]} para ${c[1][1]}`);
+ document.getElementById('plat-body').innerHTML=`
+ <div class="hero"><div class="l">Em aberto · ${p.name}</div>
+  <div><div class="v">${fmt(p.back)}</div><div class="s">protocolos na plataforma · D-30: ${fmt(p.back30)} ${saldo(p.back,p.back30)}<br>maior tipo: <b>${cats[0][0]} (${cats[0][1][1]})</b></div></div>
+  <div><div class="v">${fmt(p.ag)}</div><div class="s">chamados internos aguardando retorno<br>de <b>${fmt(p.tot)}</b> abertos · D-30: ${fmt(p.t30)} ${saldo(p.tot,p.t30)}</div></div>
+  <div><div class="v g">${p.at}</div><div class="s">chamados <b>atualizados</b><br>${pct(p.at,p.tot)} da plataforma</div></div>
+  <div><div class="v r">${fmt(p.old)}</div><div class="s">chamados internos <b>há mais de 30 dias</b><br>${pct(p.old,p.tot)} da plataforma</div></div></div>
+ <div class="note mb" style="margin-top:0"><b>Leitura do dia:</b> São ${fmt(p.back)} protocolos, contra ${fmt(p.back30)} há 30 dias.${up.length?' No período, '+up.join('; ')+'.':''}${dn.length?' Já '+dn.join('; ')+'.':''} ${p.tot?`Nos chamados internos, são ${fmt(p.tot)}, ${pct(p.area[0],p.tot,0)} sob responsabilidade da Logística.`:''}</div>
+ <div class="grid g2 mb">
+  ${card(head(p,'Cenário do dia · Protocolos','protocolos por tipo'),`<table><thead><tr><th>Tipo de protocolo</th><th>D-30</th><th>Hoje</th><th>Saldo</th><th style="width:34%"></th><th>% da plataforma</th></tr></thead><tbody>
+   ${cats.map(([c,v],i)=>`<tr${i===0&&cats.length>1?' style="background:#fdeeee"':''}><td>${i===0?'<b>'+c+'</b>':c}</td><td class="m">${v[0]}</td><td><b class="${i===0&&cats.length>1?'r':''}">${v[1]}</b></td><td>${saldo(v[1],v[0])}</td><td>${bar(v[1],mx,i===0&&cats.length>1?'rd':'')}</td><td>${pct(v[1],p.back)}</td></tr>`).join('')}
+   <tr class="tot"><td>Total aberto</td><td>${fmt(p.back30)}</td><td>${fmt(p.back)}</td><td>${saldo(p.back,p.back30)}</td><td></td><td>100%</td></tr></tbody></table>`)}
+  ${card(head(p,'Chamados internos','por região e origem'),rows.length?`<table><thead><tr><th>Região</th>${ORIG.map(o=>`<th>${o}</th>`).join('')}<th>Total</th></tr></thead><tbody>
+   ${rows.map(r=>`<tr><td>${regName(r)}</td>${r.orig.map(v=>`<td class="${v?'':'m'}">${v}</td>`).join('')}<td><b>${r.tot}</b></td></tr>`).join('')}
+   <tr class="tot"><td>Total</td>${ORIG.map((o,j)=>`<td>${sum(rows.map(r=>r.orig[j]))}</td>`).join('')}<td>${fmt(p.tot)}</td></tr></tbody></table>`:'<div class="note">Nenhum chamado interno aberto.</div>')}
+ </div>
+ ${rows.length?card(head(p,'Situação dos chamados internos por região','aguardando × atualizado · idade'),`<div class="legend"><span><i style="background:var(--bar)"></i>Aguardando</span><span><i style="background:#3aa56b"></i>Atualizado</span></div>
+  <table><thead><tr><th>Região</th><th>Aguardando</th><th>Atualizado</th><th style="width:46%"></th><th>&gt; 30 dias</th></tr></thead><tbody>
+  ${rows.map(r=>`<tr><td>${regName(r)}</td><td>${r.ag}</td><td class="g">${r.at}</td><td>${bar2(r.ag,r.at,mu)}</td><td class="r">${r.old}</td></tr>`).join('')}
+  <tr class="tot"><td>Total</td><td>${fmt(p.ag)}</td><td>${p.at}</td><td></td><td class="r">${fmt(p.old)}</td></tr></tbody></table>`,'mb'):''}
+ ${coll('↓','Protocolos pendentes','clique para ver e filtrar',`<table><thead><tr><th>Protocolo</th><th class="l">Tipo</th><th>Dias em aberto</th><th>Prazo de resposta</th></tr></thead><tbody>${PEND(id).map(x=>`<tr><td>${x[0]}</td><td class="l">${x[1]}</td><td>${x[2]}</td><td class="${x[3]==='Vencido'?'r':x[3]==='Hoje'?'a':''}">${x[3]}</td></tr>`).join('')}</tbody></table>`,'c-pend')}`;
+ document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c.dataset.p===id));
+}
+document.getElementById('v-plat').innerHTML=`<div class="chips">${P.map(p=>`<div class="chip" data-p="${p.id}">${ico(p)}${p.name}<em>${fmt(p.back)}</em></div>`).join('')}</div><div id="plat-body"></div>`;
+renderPlat('A');
+
+// ================= 4. CHAMADOS INTERNOS =================
+function incRows(){const pf=document.getElementById('f-plat').value, st=document.getElementById('f-st').value, rf=document.getElementById('f-reg').value;
+ let rows=(pf==='all'?RG:R.map((r,i)=>M[pf][i])).map(r=>({...r}));
+ if(rf!=='all')rows=rows.filter(r=>r.u===rf);
+ if(st==='ag')rows.forEach(r=>{r.at=0;r.sim=0;r.nao=0;r.tot=r.ag});if(st==='at')rows.forEach(r=>{r.ag=0;r.tot=r.at});
+ return rows.filter(r=>r.tot>0).sort((a,b)=>b.tot-a.tot)}
+function renderInc(){const rows=incRows();const mu=rows.length?Math.max(...rows.map(r=>r.ag+r.at)):1;const t={ag:sum(rows,'ag'),at:sum(rows,'at'),sim:sum(rows,'sim'),nao:sum(rows,'nao'),tot:sum(rows,'tot'),t30:sum(rows,'t30')};
+ document.getElementById('inc-tab').innerHTML=`<thead><tr><th>Região</th><th>Aguardando</th><th>Atualizado</th><th style="width:34%"></th><th>Total</th><th>Saldo</th></tr></thead><tbody>
+ ${rows.map(r=>`<tr><td>${regName(r)}</td><td>${fmt(r.ag)}</td><td class="g">${r.at}</td><td>${bar2(r.ag,r.at,mu)}</td><td><b>${fmt(r.tot)}</b></td><td>${saldo(r.tot,r.t30)}</td></tr>`).join('')}
+ <tr class="tot"><td>Total geral</td><td>${fmt(t.ag)}</td><td>${t.at}</td><td></td><td>${fmt(t.tot)}</td><td>${saldo(t.tot,t.t30)}</td></tr></tbody>`}
+const topNao=[...RG].sort((a,b)=>b.nao-a.nao)[0], lowUpd=[...RG].filter(r=>r.tot>100).sort((a,b)=>a.at/a.tot-b.at/b.tot)[0];
+const COLAB=['Analista 1','Analista 2','Analista 3','Analista 4','Analista 5','Analista 6'], COLW=[.24,.21,.18,.16,.12,.09];
+document.getElementById('v-inc').innerHTML=`
+<div class="att"><div>Em 30 dias, os chamados internos caíram de ${fmt(T.t30)} para <span class="g">${fmt(T.tot)}</span>, e os com mais de 30 dias de ${fmt(T.old30)} para ${fmt(T.old)}.</div><span class="nx" data-go="area">Próximo →</span></div>
+<div class="grid g5 mb">
+ ${kpi('Chamados abertos',fmt(T.tot),`D-30: ${fmt(T.t30)} ${saldo(T.tot,T.t30)}`)}
+ ${kpi('Aguardando retorno',fmt(T.ag),`${pct(T.ag,T.tot)} · D-30: ${fmt(T.ag30)} ${saldo(T.ag,T.ag30)}`)}
+ ${kpi('Atualizados',`<span class="g">${T.at}</span>`,`${pct(T.at,T.tot)} · D-30: ${T.at30} ${saldo(T.at,T.at30,false)}`)}
+ ${kpi('Abertos até 7 dias',fmt(AGE[0]),`${pct(AGE[0],T.tot)} · entrada recente`)}
+ ${kpi('Acima de 30 dias',fmt(T.old),`${pct(T.old,T.tot)} · D-30: ${fmt(T.old30)} ${saldo(T.old,T.old30)}`,'r')}
+</div>
+<div class="grid g2 mb" style="align-items:start">
+ ${card(head('⚑','Chamados internos abertos por região','filtros valem para toda a aba'),`<div class="filters">
+  <select id="f-plat"><option value="all">Todas as plataformas</option>${P.filter(p=>p.tot).map(p=>`<option value="${p.id}">${p.name}</option>`).join('')}</select>
+  <select id="f-orig"><option>Todas as origens</option>${ORIG.map(o=>`<option>${o}</option>`).join('')}</select>
+  <select id="f-reg"><option value="all">Todas as regiões</option>${R.map(r=>`<option>${r[0]}</option>`).join('')}</select>
+  <select id="f-st"><option value="all">Todos os status</option><option value="ag">Aguardando</option><option value="at">Atualizado</option></select></div>
+  <div class="legend"><span><i style="background:var(--bar)"></i>Aguardando</span><span><i style="background:#3aa56b"></i>Atualizado</span></div>
+  <table id="inc-tab"></table>
+  <div class="note"><b>Leitura:</b> A ${RGs[0].u} concentra ${pct(RGs[0].tot,T.tot)} dos chamados (${fmt(RGs[0].tot)}). A menor taxa de atualização está na ${lowUpd.u} (${pct(lowUpd.at,lowUpd.tot)}), e é a região que mais precisa de cobrança de retorno.</div>`)}
+ <div class="grid">
+  ${card(head('⧗','Tempo em aberto','dias desde a criação'),`<table><thead><tr><th>Faixa</th><th style="width:40%"></th><th>Qtd</th><th>%</th></tr></thead><tbody>
+  ${AGE.map((v,i)=>`<tr><td>${AGEL[i]}</td><td>${bar(v,Math.max(...AGE),i===3?'rd':'')}</td><td><b class="${i===3?'r':''}">${fmt(v)}</b></td><td>${pct(v,T.tot)}</td></tr>`).join('')}
+  <tr class="tot"><td>Total</td><td></td><td>${fmt(T.tot)}</td><td>100%</td></tr></tbody></table>`)}
+  ${card(head('≡','Por assunto'),`<table><thead><tr><th>Assunto</th><th>Qtd</th><th>%</th></tr></thead><tbody>${SUBJ.map((v,i)=>`<tr><td>${SUBJL[i]}</td><td><b>${fmt(v)}</b></td><td>${pct(v,T.tot)}</td></tr>`).join('')}</tbody></table>`)}
+  ${card(head('✉','Por origem'),`<table><thead><tr><th>Origem</th><th>Qtd</th><th>%</th></tr></thead><tbody>${ORIG.map((o,j)=>{const v=sum(RG.map(r=>r.orig[j]));return`<tr><td>${o}</td><td><b>${fmt(v)}</b></td><td>${pct(v,T.tot)}</td></tr>`}).join('')}</tbody></table>`)}
+ </div>
+</div>
+${coll('☺','Chamados em andamento por analista','clique para ver as quantidades por analista',`<table><thead><tr><th>Analista</th><th>Em andamento</th><th>Atualizados hoje</th><th>% do total</th></tr></thead><tbody>${alloc(T.at,COLW).map((v,i)=>`<tr><td>${COLAB[i]}</td><td>${v}</td><td>${Math.round(v*.35)}</td><td>${pct(v,T.at)}</td></tr>`).join('')}</tbody></table>`,'c-colab')}`;
+['f-plat','f-st','f-reg','f-orig'].forEach(id=>document.getElementById(id).addEventListener('change',renderInc));renderInc();
+
+// ================= 5. ÁREA RESPONSÁVEL =================
+const tratV=alloc(T.tot,TRAT.map(t=>t[2]));
+document.getElementById('v-area').innerHTML=`
+<div class="att"><div><span class="r">Logística</span> responde por ${pct(T.area[0],T.tot,0)} dos chamados internos (${fmt(T.area[0])}) · <span class="g">5 de 6 áreas reduziram no dia</span> · Produção com ${fmt(T.area[2])} (${fmt(T.areaPrev[2])} ontem)</div><span class="nx" data-go="plano">Próximo →</span></div>
+<div class="grid g6 mb">${AREAS.map((a,j)=>kpi(a,fmt(T.area[j]),`${pct(T.area[j],T.tot)} · ontem: ${fmt(T.areaPrev[j])} ${saldo(T.area[j],T.areaPrev[j])}`)).join('')}</div>
+<div class="grid g2 mb">
+ ${card(head('⚑','Chamados internos por região e área responsável'),`<table><thead><tr><th>Região</th>${AREAS_S.map(a=>`<th>${a}</th>`).join('')}<th>Total</th></tr></thead><tbody>
+ ${RGs.map(r=>`<tr><td>${regName(r)}</td>${r.area.map(v=>`<td class="${v?'':'m'}">${fmt(v)}</td>`).join('')}<td><b>${fmt(r.tot)}</b></td></tr>`).join('')}
+ <tr class="tot"><td>Total</td>${T.area.map(v=>`<td>${fmt(v)}</td>`).join('')}<td>${fmt(T.tot)}</td></tr></tbody></table>`)}
+ ${card(head('★','Chamados internos por plataforma e área responsável'),`<table><thead><tr><th>Plataforma</th>${AREAS_S.map(a=>`<th>${a}</th>`).join('')}<th>Total</th></tr></thead><tbody>
+ ${byTot.filter(p=>p.tot).map(p=>`<tr><td>${plcS(p)}</td>${p.area.map(v=>`<td class="${v?'':'m'}">${fmt(v)}</td>`).join('')}<td><b>${fmt(p.tot)}</b></td></tr>`).join('')}
+ <tr class="tot"><td>Total</td>${T.area.map(v=>`<td>${fmt(v)}</td>`).join('')}<td>${fmt(T.tot)}</td></tr></tbody></table>`)}
+</div>
+${card(head('✎','Tratativas por área responsável','o que cada área precisa fazer'),`<table><thead><tr><th>Área responsável</th><th class="l">Tratativa</th><th style="width:28%"></th><th>Quantidade</th><th>% do total</th></tr></thead><tbody>
+ ${TRAT.map((t,i)=>`<tr><td><b>${t[0]}</b></td><td class="l">${t[1]}</td><td>${bar(tratV[i],Math.max(...tratV))}</td><td><b>${fmt(tratV[i])}</b></td><td>${pct(tratV[i],T.tot)}</td></tr>`).join('')}</tbody></table>`,'mb')}
+${coll('≡','Detalhamento · Área responsável','clique para ver e filtrar',`<table><thead><tr><th>Chamado</th><th class="l">Plataforma</th><th class="l">Região</th><th class="l">Área</th><th class="l">Tratativa</th><th>Dias</th></tr></thead><tbody>${Array.from({length:8},(_,i)=>{const t=TRAT[(i*3)%TRAT.length];return`<tr><td>CH-${70412+i*53}</td><td class="l">${P[i%4===3?1:i%3].name}</td><td class="l">${R[(i*5)%R.length][0]}</td><td class="l">${t[0]}</td><td class="l">${t[1]}</td><td>${4+(i*11)%40}</td></tr>`}).join('')}</tbody></table>`,'c-det')}`;
+
+// ================= 6. PLANO DE AÇÃO =================
+const PLANO=[
+ ['Manter a reputação no nível máximo no Marketplace A','Mais vendas no canal, com a reputação protegida','Marketplace A','Imediato','Atendimento','Acompanhar os protocolos do dia e atuar primeiro nos casos que afetam a reputação.','Em andamento'],
+ ['Revisar o mix de produtos nos marketplaces','Menos complexidade logística e menos itens que geram atraso e cancelamento','Marketplaces','Sem prazo','Comercial / Logística','Ranquear os itens por atraso, protocolo e cancelamento e pausar os anúncios de pior desempenho.','Não iniciado'],
+ ['Oferecer novo prazo antes do atraso','Dar uma saída antes do descumprimento do prazo','Marketplaces','Imediato','Logística','Definir a regra de novo prazo, padronizar a comunicação ao cliente e treinar o atendimento.','Concluído'],
+ ['Ajustar datas de pedidos com risco de atraso','Agir antes do atraso, evitando envio fora do prazo','Marketplaces','Sem prazo','Comercial / Logística','Listar diariamente os pedidos em risco, validar com a Logística e ajustar a data no canal quando permitido.','Não iniciado'],
+ ['Revisar a área de entrega','Prazos menores e menos atrasos','Marketplaces, por região','Sem prazo','Logística / Comercial','Mapear atrasos por região, definir o raio de entrega e acompanhar o efeito.','Não iniciado'],
+ ['Preventiva de atraso','Reduzir protocolos por atraso, avisando o cliente antes do vencimento','Marketplace A','Diário','Atendimento','Identificar as vendas atrasadas ou com risco de atraso e avisar o cliente do novo prazo.','Em andamento'],
+ ['Responder protocolos do dia e antecipar prazos','Evitar vencimentos e decisões desfavoráveis da plataforma','Marketplace A','Diário','Atendimento','Responder todos os protocolos do dia e antecipar a tratativa dos que vencem depois.','Em andamento'],
+ ['Pós-compra em até 24h úteis','Resposta rápida evita que a dúvida vire protocolo','Marketplace A','Diário','Atendimento','Responder todas as mensagens de pós-compra em até 24h úteis.','Em andamento'],
+ ['Painel de coletas e entregas interrompidas','Dar visibilidade e cobrar o SLA por região','Atendimento / Logística','Imediato','Logística','Criar um painel para acompanhar as solicitações de coleta e de interrupção de entrega, com SLA por região.','Não iniciado']
+];
+const stc={'Em andamento':'t-amb','Não iniciado':'t-gr','Concluído':'t-ok'};
+function renderPlano(){const fq=document.getElementById('p-who').value, fs=document.getElementById('p-st').value;
+ const rows=PLANO.filter(r=>(fq==='all'||r[4].includes(fq))&&(fs==='all'||r[6]===fs));
+ document.getElementById('plano-tab').innerHTML=`<thead><tr><th class="l">O quê?</th><th class="l">Por quê?</th><th class="l">Onde?</th><th class="l">Quando?</th><th class="l">Quem?</th><th class="l">Como?</th><th class="l">Status</th></tr></thead><tbody>${rows.map(r=>`<tr>${r.slice(0,6).map(x=>`<td>${x}</td>`).join('')}<td><span class="st ${stc[r[6]]}">${r[6]}</span></td></tr>`).join('')}</tbody>`}
+const cnt=s=>PLANO.filter(r=>r[6]===s).length;
+document.getElementById('v-plano').innerHTML=`
+<div class="att"><div>${PLANO.length} ações no plano · <span class="g">${cnt('Concluído')} concluída</span> · ${cnt('Em andamento')} em andamento · ${cnt('Não iniciado')} não iniciadas</div><span class="nx" data-go="sell">Início ↺</span></div>
+<div class="grid g4 mb">${kpi('Ações no plano',PLANO.length,'Plano de ação')}${kpi('Concluídas',`<span class="g">${cnt('Concluído')}</span>`,pct(cnt('Concluído'),PLANO.length)+' das ações')}${kpi('Em andamento',cnt('Em andamento'),pct(cnt('Em andamento'),PLANO.length)+' das ações')}${kpi('Não iniciadas',cnt('Não iniciado'),pct(cnt('Não iniciado'),PLANO.length)+' das ações')}</div>
+${card(head('✎','Plano de ação · Indicadores Marketplace','modelo 5W2H · atualizado semanalmente'),`<p style="margin:0 0 8px;color:#4d5670">Objetivo: <b>levar os indicadores dos marketplaces ao nível máximo</b></p>
+ <div class="filters"><select id="p-who"><option value="all">Todos os responsáveis</option>${['Atendimento','Logística','Comercial','Regiões'].map(x=>`<option>${x}</option>`).join('')}</select><select id="p-st"><option value="all">Todos os status</option>${['Em andamento','Não iniciado','Concluído'].map(x=>`<option>${x}</option>`).join('')}</select></div>
+ <table class="plano" id="plano-tab"></table>`)}`;
+['p-who','p-st'].forEach(id=>document.getElementById(id).addEventListener('change',renderPlano));renderPlano();
+
+// ================= NAVEGAÇÃO =================
+function go(v){document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.v===v));['sell','geral','plat','inc','area','plano'].forEach(s=>document.getElementById('v-'+s).classList.toggle('hide',s!==v));window.scrollTo(0,0)}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-v],[data-go],[data-p],[data-goplat],[data-coll]');if(!t)return;
+ if(t.dataset.v)go(t.dataset.v);else if(t.dataset.go)go(t.dataset.go);else if(t.dataset.p)renderPlat(t.dataset.p);else if(t.dataset.goplat){go('plat');renderPlat(t.dataset.goplat)}else if(t.dataset.coll)document.getElementById(t.dataset.coll).classList.toggle('open')});
+window.__go=go;window.__plat=renderPlat;
+</script>
+</body>
+</html>
