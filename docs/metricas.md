@@ -49,4 +49,4 @@ Cada plataforma tem seus próprios indicadores. O painel padroniza a leitura em 
 | Piso (mínimo) | Entrega no prazo, avaliação, nota da loja | Valor ≥ meta |
 | Qualitativa | Nível da loja | Conforme a escala da plataforma |
 
-A regra de cores está em [`regras.md`](regras.md).
+As metas ficam em um bloco JSON separado da lógica. A regra de cores e o formato de cada registro estão em [`regras.md`](regras.md).

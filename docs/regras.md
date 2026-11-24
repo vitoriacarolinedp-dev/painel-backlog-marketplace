@@ -8,11 +8,29 @@
 
 ## 2. Cores pela meta
 
-| Cor | Meta-teto | Meta-piso |
-|---|---|---|
-| 🟢 Verde | Valor ≤ meta | Valor ≥ meta |
-| 🟡 Amarelo | Até 15% acima da meta | Até 3% abaixo da meta |
-| 🔴 Vermelho | Mais de 15% acima da meta | Mais de 3% abaixo da meta |
+As metas ficam em um **bloco de dados JSON separado da lógica** (`<script type="application/json" id="metas">` no `index.html`). Cada indicador é um registro:
+
+```json
+["Protocolos / vendas", "≤ 1%", "teto", "p2", [0.0144, 0.02, 0.0199]]
+```
+
+| Posição | Conteúdo |
+|---|---|
+| 1 | Nome do indicador |
+| 2 | Meta em texto, com operador (`≤`, `<`, `≥`, `>`) |
+| 3 | Tipo: `teto` (taxas, menor é melhor), `piso` (notas e prazos, maior é melhor) ou `txt` (escala qualitativa) |
+| 4 | Formato de exibição (`p2` = percentual com 2 casas, `n1` = número com 1 casa, `h` = horas) |
+| 5 | Valores de D-30, D-7 e hoje |
+
+Uma única função (`classifica`) interpreta o operador e o valor da meta e devolve a cor. **Para revisar uma meta numérica, basta alterar o texto da meta no JSON; o código não muda.**
+
+| Cor | Regra |
+|---|---|
+| 🟢 Verde | Dentro da meta |
+| 🟡 Amarelo | Dentro da meta, mas a até 1 ponto do limite |
+| 🔴 Vermelho | Fora da meta |
+
+Indicadores qualitativos (`txt`), como o nível da loja, usam uma escala de status definida no código: Verde e Excelente em verde, Bom e Amarelo em amarelo, demais em vermelho.
 
 Nas colunas de saldo, a cor mostra a direção: **verde** quando o número melhora e **vermelho** quando piora, conforme o tipo de métrica.
 
