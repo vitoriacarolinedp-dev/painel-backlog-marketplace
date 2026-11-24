@@ -6,7 +6,9 @@ Painel interativo que consolida, em uma leitura diária, o backlog de protocolos
 
 ![Demonstração do painel](assets/demo.gif)
 
-🔗  **Acesse o painel:** [vitoriacarolinedp-dev.github.io/painel-backlog-marketplace](https://vitoriacarolinedp-dev.github.io/painel-backlog-marketplace/)
+🔗 **Acesse o painel:** [vitoriacarolinedp-dev.github.io/painel-backlog-marketplace](https://vitoriacarolinedp-dev.github.io/painel-backlog-marketplace/)
+
+---
 
 ## Problema de negócio
 
@@ -80,6 +82,7 @@ Indicadores dos sellers ─────┘                                      
 - **Todo número tem comparativo.** Um valor isolado não diz se a operação melhorou ou piorou.
 - **Todo alerta tem responsável.** Sem a área que precisa agir, o alerta vira só mais um número.
 - **Meta-teto e meta-piso são tratadas de forma diferente.** Em uma taxa de cancelamento, menor é melhor; em uma nota de avaliação, maior é melhor.
+- **Metas separadas da lógica.** As metas ficam em um bloco JSON; uma única função interpreta operador e valor. Revisar uma meta numérica não exige mudar o código.
 - **A consistência vem antes do visual.** Todo total fecha com a soma das partes, em todas as visões.
 
 Detalhes em [`docs/metricas.md`](docs/metricas.md) e [`docs/regras.md`](docs/regras.md).

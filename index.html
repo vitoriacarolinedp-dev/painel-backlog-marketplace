@@ -104,6 +104,357 @@ footer{margin:16px 0 4px;color:var(--muted);font-size:11px;border-top:1px solid 
 <section id="v-inc" class="hide"></section><section id="v-area" class="hide"></section><section id="v-plano" class="hide"></section>
 <footer><span class="g">Verde</span>: melhora &nbsp;|&nbsp; <span class="r">Vermelho</span>: piora &nbsp;|&nbsp; Cinza: sem alteração &nbsp;|&nbsp; Todos os nomes, números e ações deste painel são fictícios, criados só para demonstrar a estrutura.</footer>
 </div>
+<!-- Metas e valores dos indicadores dos sellers: dado separado da lógica -->
+<script type="application/json" id="metas">
+{
+ "A": [
+  [
+   "Protocolos / vendas",
+   "≤ 1%",
+   "teto",
+   "p2",
+   [
+    0.0144,
+    0.02,
+    0.0199
+   ]
+  ],
+  [
+   "Disputas / vendas",
+   "< 0,5%",
+   "teto",
+   "p2",
+   [
+    0.005,
+    0.0073,
+    0.0072
+   ]
+  ],
+  [
+   "Cancelamento pelo vendedor",
+   "< 0,5%",
+   "teto",
+   "p2",
+   [
+    0.0003,
+    0.0,
+    0.0003
+   ]
+  ],
+  [
+   "Nível da loja",
+   "Máximo",
+   "txt",
+   null,
+   [
+    "Verde",
+    "Verde",
+    "Amarelo"
+   ]
+  ]
+ ],
+ "B": [
+  [
+   "Pedidos fora do prazo",
+   "< 8%",
+   "teto",
+   "p2",
+   [
+    0.0476,
+    0.0743,
+    0.0196
+   ]
+  ],
+  [
+   "Pontos de penalidade",
+   "0",
+   "teto",
+   "n0",
+   [
+    0,
+    2,
+    2
+   ]
+  ],
+  [
+   "Avaliação da loja",
+   "≥ 4,8",
+   "piso",
+   "n2",
+   [
+    4.82,
+    4.82,
+    4.83
+   ]
+  ],
+  [
+   "Nível da loja",
+   "Excelente",
+   "txt",
+   null,
+   [
+    "Bom",
+    "Regular",
+    "Regular"
+   ]
+  ]
+ ],
+ "C": [
+  [
+   "Envios com atraso",
+   "< 4%",
+   "teto",
+   "p2",
+   [
+    0.012,
+    0.0366,
+    0.0729
+   ]
+  ],
+  [
+   "Pedidos com problema",
+   "< 1%",
+   "teto",
+   "p2",
+   [
+    0.0543,
+    0.0584,
+    0.0579
+   ]
+  ],
+  [
+   "Garantia de reembolso",
+   "< 1%",
+   "teto",
+   "p2",
+   [
+    0.0336,
+    0.0326,
+    0.0391
+   ]
+  ],
+  [
+   "Saúde da conta",
+   "≥ 200",
+   "piso",
+   "n0",
+   [
+    222,
+    230,
+    238
+   ]
+  ]
+ ],
+ "E": [
+  [
+   "Reputação geral",
+   "5",
+   "piso",
+   "n1",
+   [
+    2.2,
+    2.2,
+    2.8
+   ]
+  ],
+  [
+   "Entregues no prazo",
+   "≥ 95%",
+   "piso",
+   "p1",
+   [
+    0.737,
+    0.66,
+    0.642
+   ]
+  ],
+  [
+   "Cancelamentos",
+   "< 2%",
+   "teto",
+   "p1",
+   [
+    0.06,
+    0.053,
+    0.034
+   ]
+  ],
+  [
+   "Agilidade no atendimento",
+   "≥ 90%",
+   "piso",
+   "p1",
+   [
+    0.997,
+    0.989,
+    0.988
+   ]
+  ]
+ ],
+ "F": [
+  [
+   "Nota",
+   "5",
+   "piso",
+   "n1",
+   [
+    2.8,
+    1.9,
+    1.9
+   ]
+  ],
+  [
+   "Envio no prazo",
+   "≥ 97%",
+   "piso",
+   "p2",
+   [
+    0.9771,
+    0.937,
+    0.9292
+   ]
+  ],
+  [
+   "Entrega no prazo",
+   "≥ 97%",
+   "piso",
+   "p2",
+   [
+    0.8571,
+    0.7082,
+    0.6877
+   ]
+  ],
+  [
+   "Cancelamento",
+   "< 1,5%",
+   "teto",
+   "p2",
+   [
+    0.0651,
+    0.1057,
+    0.1246
+   ]
+  ]
+ ],
+ "G": [
+  [
+   "Performance geral",
+   "5",
+   "piso",
+   "n1",
+   [
+    3.9,
+    3.9,
+    3.9
+   ]
+  ],
+  [
+   "Cancelados",
+   "5",
+   "piso",
+   "n1",
+   [
+    5,
+    5,
+    5
+   ]
+  ],
+  [
+   "Atraso na expedição",
+   "5",
+   "piso",
+   "n1",
+   [
+    2.8,
+    2.8,
+    2.8
+   ]
+  ]
+ ],
+ "H": [
+  [
+   "Taxa de chamados",
+   "< 0,5%",
+   "teto",
+   "p0",
+   [
+    0.04,
+    0.03,
+    0.02
+   ]
+  ],
+  [
+   "Tempo de resposta",
+   "< 24h",
+   "teto",
+   "h",
+   [
+    36,
+    27,
+    19
+   ]
+  ],
+  [
+   "Envios com atraso",
+   "< 3%",
+   "teto",
+   "p0",
+   [
+    0.52,
+    0.44,
+    0.33
+   ]
+  ],
+  [
+   "Taxa de reembolso",
+   "< 5%",
+   "teto",
+   "p0",
+   [
+    0.03,
+    0.03,
+    0.02
+   ]
+  ]
+ ],
+ "D": [
+  [
+   "Tempo de resposta",
+   "< 24h",
+   "teto",
+   "h",
+   [
+    31,
+    22,
+    18
+   ]
+  ],
+  [
+   "Pedidos entregues no prazo",
+   "≥ 95%",
+   "piso",
+   "p1",
+   [
+    0.931,
+    0.954,
+    0.962
+   ]
+  ],
+  [
+   "Avaliação dos clientes",
+   "≥ 4,5",
+   "piso",
+   "n1",
+   [
+    4.4,
+    4.5,
+    4.6
+   ]
+  ]
+ ]
+}
+</script>
 <script>
 // ================= DADOS FICTÍCIOS =================
 const CATS=['Pós-compra','Entrega','Cancelamento','Troca e devolução','Pré-compra'];
@@ -164,28 +515,43 @@ const regName=r=>r.u+(r.u===PILOT?'<span class="pill">projeto piloto</span>':'')
 // ================= 1. INDICADORES DO DIA =================
 // [indicador, meta, tipo max|min|none, alvo, D-30, D-7, Hoje, sufixo, casas]
 const S={
- A:{tag:['Fora da meta','t-red'],extra:'<span class="dot">● Amarelo</span>',rows:[['Protocolos / vendas','≤ 1%','max',1,1.44,2.0,1.99,'%',2],['Disputas / vendas','< 0,5%','max',.5,.5,.73,.72,'%',2],['Cancelamento pelo vendedor','< 0,5%','max',.5,.03,0,.03,'%',2],['Nível da loja','Máximo','none',0,'Verde','Verde','Amarelo','',0]],txt:'Protocolos em 1,99% das vendas (meta ≤ 1%); eram 2,00% há uma semana. Disputas em 0,72% (meta < 0,5%). Cancelamento pelo vendedor em 0,03%, dentro da meta.'},
- B:{tag:['Atenção','t-gr'],rows:[['Pedidos fora do prazo','< 8%','max',8,4.76,7.43,1.96,'%',2],['Pontos de penalidade','0','max',0,0,2,2,'',0],['Avaliação da loja','5','min',4.8,4.82,4.82,4.83,'',2],['Nível da loja','Excelente','none',0,'Bom','Regular','Regular','',0]],txt:'Pedidos fora do prazo em 1,96% (7,43% há uma semana), dentro da meta. Nível da loja em "Regular" e os 2 pontos de penalidade seguem (meta 0).'},
- C:{tag:['Crítico','t-red'],rows:[['Envios com atraso','< 4%','max',4,1.2,3.66,7.29,'%',2],['Pedidos com problema','< 1%','max',1,5.43,5.84,5.79,'%',2],['Garantia de reembolso','< 1%','max',1,3.36,3.26,3.91,'%',2],['Saúde da conta','≥ 200','min',200,222,230,238,'',0]],txt:'Envios com atraso em 7,29%, fora da meta (< 4%); eram 3,66% há uma semana. Pedidos com problema em 5,79% e garantia de reembolso em 3,91%. Saúde da conta em 238.'},
- E:{tag:['Fora da meta','t-red'],rows:[['Reputação geral','5','min',4,2.2,2.2,2.8,'',1],['Entregues no prazo','≥ 95%','min',95,73.7,66,64.2,'%',1],['Cancelamentos','< 2%','max',2,6,5.3,3.4,'%',1],['Agilidade no atendimento','≥ 90%','min',90,99.7,98.9,98.8,'%',1]],txt:'Entregues no prazo em 64,2% (73,7% há 30 dias; meta ≥ 95%). Cancelamentos caíram de 6,0% para 3,4%, ainda acima da meta. Reputação subiu de 2,2 para 2,8.'},
- F:{tag:['Crítico','t-red'],rows:[['Nota','5','min',4,2.8,1.9,1.9,'',1],['Envio no prazo','≥ 97%','min',97,97.71,93.7,92.92,'%',2],['Entrega no prazo','≥ 97%','min',97,85.71,70.82,68.77,'%',2],['Cancelamento','< 1,5%','max',1.5,6.51,10.57,12.46,'%',2]],txt:'Em 30 dias, a entrega no prazo caiu de 85,71% para 68,77%. Cancelamento em 12,46%, mais de 8 vezes a meta. Nota em 1,9.'},
- G:{tag:['Fora da meta','t-red'],rows:[['Performance geral','5','min',4.5,3.9,3.9,3.9,'',1],['Cancelados','5','min',4.5,5,5,5,'',1],['Atraso na expedição','5','min',4.5,2.8,2.8,2.8,'',1]],txt:'Sem alteração em 30 dias: performance geral em 3,9 (meta 5) e atraso na expedição em 2,8. Cancelados em 5,0, na meta.'},
- H:{tag:['Em melhora','t-gr'],rows:[['Taxa de chamados','< 0,5%','max',.5,4,3,2,'%',0],['Tempo de resposta','< 24h','max',24,36,27,19,'h',0],['Envios com atraso','< 3%','max',3,52,44,33,'%',0],['Taxa de reembolso','< 5%','max',5,3,3,2,'%',0]],txt:'Todos os indicadores melhoraram na semana: tempo de resposta de 27h para 19h (dentro da meta) e envios com atraso de 44% para 33%.'},
- D:{tag:['Dentro da meta','t-ok'],rows:[['Tempo de resposta','< 24h','max',24,31,22,18,'h',0],['Pedidos entregues no prazo','≥ 95%','min',95,93.1,95.4,96.2,'%',1],['Avaliação dos clientes','≥ 4,5','min',4.5,4.4,4.5,4.6,'',1]],txt:'Tempo de resposta caiu de 31h para 18h em 30 dias. Entrega no prazo e avaliação voltaram para dentro da meta.'}
+ A:{tag:['Fora da meta','t-red'],extra:'<span class="dot">● Amarelo</span>',txt:'Protocolos em 1,99% das vendas (meta ≤ 1%); eram 2,00% há uma semana. Disputas em 0,72% (meta < 0,5%). Cancelamento pelo vendedor em 0,03%, dentro da meta.'},
+ B:{tag:['Atenção','t-gr'],txt:'Pedidos fora do prazo em 1,96% (7,43% há uma semana), dentro da meta. Nível da loja em "Regular" e os 2 pontos de penalidade seguem (meta 0).'},
+ C:{tag:['Crítico','t-red'],txt:'Envios com atraso em 7,29%, fora da meta (< 4%); eram 3,66% há uma semana. Pedidos com problema em 5,79% e garantia de reembolso em 3,91%. Saúde da conta em 238.'},
+ E:{tag:['Fora da meta','t-red'],txt:'Entregues no prazo em 64,2% (73,7% há 30 dias; meta ≥ 95%). Cancelamentos caíram de 6,0% para 3,4%, ainda acima da meta. Reputação subiu de 2,2 para 2,8.'},
+ F:{tag:['Crítico','t-red'],txt:'Em 30 dias, a entrega no prazo caiu de 85,71% para 68,77%. Cancelamento em 12,46%, mais de 8 vezes a meta. Nota em 1,9.'},
+ G:{tag:['Fora da meta','t-red'],txt:'Sem alteração em 30 dias: performance geral em 3,9 (meta 5) e atraso na expedição em 2,8. Cancelados em 5,0, na meta.'},
+ H:{tag:['Em melhora','t-gr'],txt:'Todos os indicadores melhoraram na semana: tempo de resposta de 27h para 19h (dentro da meta) e envios com atraso de 44% para 33%.'},
+ D:{tag:['Dentro da meta','t-ok'],txt:'Tempo de resposta caiu de 31h para 18h em 30 dias. Entrega no prazo e avaliação voltaram para dentro da meta.'}
 };
 const ORDER=['A','B','E','D','C','F','G','H'];
-function cellCls(r,v){const[,,type,alvo]=r;if(type==='none'){if(typeof v==='string')return v==='Verde'||v==='Bom'||v==='Excelente'?'g':v==='Amarelo'||v==='Regular'?'r':'';return''}
- if(type==='max')return v<=alvo?'g':(v<=alvo*1.15?'a':'r');return v>=alvo?'g':(v>=alvo*.97?'a':'r')}
-const nf=(v,d,s)=>typeof v==='string'?v:v.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d})+s;
+// Metas lidas do bloco JSON: [indicador, meta, tipo (teto|piso|txt), formato, [D-30, D-7, Hoje]]
+const METAS=JSON.parse(document.getElementById('metas').textContent);
+Object.keys(S).forEach(k=>S[k].rows=METAS[k]);
+const ESCALA={Verde:'g',Excelente:'g',Bom:'a',Amarelo:'a'};
+// Uma única função classifica qualquer indicador: interpreta operador e valor da meta e aplica teto/piso
+function classifica(meta,tipo,fmt,v){
+ if(v==null)return '';
+ if(tipo==='txt')return ESCALA[String(v).trim()]||'r';
+ const m=String(meta).replace(/\s/g,''),op=(m.match(/^(≤|<|≥|>)/)||[''])[0];
+ const num=parseFloat(m.slice(op.length).replace('%','').replace('h','').replace(',','.'));if(isNaN(num))return '';
+ const x=fmt&&fmt[0]==='p'?v*100:v;let ok,dist;
+ if(tipo==='teto'){ok=op==='<'?x<num:x<=num;dist=num-x}else{ok=op==='>'?x>num:x>=num;dist=x-num}
+ if(!ok)return 'r';
+ if((tipo==='teto'&&x===0)||(tipo==='piso'&&!op))return 'g';
+ return dist<=1?'a':'g'; // dentro da meta, mas a até 1 ponto do limite: amarelo
+}
+const FMT={h:v=>v.toFixed(0)+'h'};
+function nf(v,fmt){if(typeof v==='string')return v;if(FMT[fmt])return FMT[fmt](v);const d=+fmt.slice(1);const x=fmt[0]==='p'?v*100:v;return x.toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d})+(fmt[0]==='p'?'%':'')}
 document.getElementById('v-sell').innerHTML=`
 <div class="att"><div>Atenção: <span class="r">Marketplace F</span> (cancelamento 12,46%), <span class="r">Marketplace C</span> (envios com atraso 7,29%) e <span class="r">Marketplace E</span> (entrega no prazo 64,2%) · <span class="g">Marketplace H melhora em todos os indicadores (tempo de resposta 19h)</span></div><span class="nx" data-go="geral">Próximo →</span></div>
 <div class="grid g4">${ORDER.map(k=>{const s=S[k];const p=P.find(x=>x.id===(s.base||k));const name=s.name||p.name;
  return card(`<div class="ch">${ico(p)}<h3>${name}</h3><span class="tag ${s.tag[1]}">${s.tag[0]}</span>${s.extra||''}</div>`,
  `<table><thead><tr><th>Indicador</th><th>Meta</th><th>D-30</th><th>D-7</th><th>Hoje</th></tr></thead><tbody>
- ${s.rows.map(r=>`<tr><td style="white-space:normal">${r[0]}</td><td class="m">${r[1]}</td>${[r[4],r[5],r[6]].map(v=>`<td class="${cellCls(r,v)}">${nf(v,r[8],r[7])}</td>`).join('')}</tr>`).join('')}</tbody></table>
+ ${s.rows.map(r=>`<tr><td style="white-space:normal">${r[0]}</td><td class="m">${r[1]}</td>${r[4].map(v=>`<td class="${classifica(r[1],r[2],r[3],v)}">${nf(v,r[3])}</td>`).join('')}</tr>`).join('')}</tbody></table>
  <div class="note">${s.txt}</div>
  <div class="bk"><b>No backlog:</b> ${s.bk||`${fmt(p.back)} protocolos na plataforma · ${fmt(p.tot)} chamados internos${p.tot?`, ${pct(p.old,p.tot,0)} há mais de 30 dias`:''}`} <a data-goplat="${p.id}">ver →</a></div>`)}).join('')}</div>
-<p class="m" style="font-size:11px;margin:10px 0 0">Comparativo D-30 | D-7 | Hoje. Cor pela meta: <span class="g">verde</span> dentro da meta · <span class="a">amarelo</span> perto do limite · <span class="r">vermelho</span> fora da meta.</p>`;
+<p class="m" style="font-size:11px;margin:10px 0 0">Comparativo D-30 | D-7 | Hoje. Cor pela meta: <span class="g">verde</span> dentro da meta · <span class="a">amarelo</span> dentro da meta, mas a até 1 ponto do limite · <span class="r">vermelho</span> fora da meta. Taxas: meta é teto. Notas e prazos: meta é piso.</p>`;
 
 // ================= 2. RESUMO DO DIA =================
 const regFill=[...RG].filter(r=>r.sv).sort((a,b)=>b.sv-a.sv);
